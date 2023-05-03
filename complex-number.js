@@ -21,21 +21,21 @@ const complexNumber = function(real, imaginary) {
     return `${real} ${operator} ${Math.abs(imaginary)}i`;
   };
 
-  const add = function(augend) {
-    const sumOfReal = real + augend.getRealPart();
-    const sumOfImaginary = imaginary + augend.getImaginaryPart();
+  const add = function(other) {
+    const sumOfReal = real + other.getRealPart();
+    const sumOfImaginary = imaginary + other.getImaginaryPart();
 
     return complexNumber(sumOfReal, sumOfImaginary);
   };
 
-  const mul = function(multiplicand) {
+  const mul = function(other) {
     const r = real;
     const i = imaginary;
-    const mr = multiplicand.getRealPart();
-    const mi = multiplicand.getImaginaryPart();
+    const or = other.getRealPart();
+    const oi = other.getImaginaryPart();
 
-    const realPart = (r * mr) - (i * mi);
-    const imaginaryPart = (i * mr) + (r * mi);
+    const realPart = (r * or) - (i * oi);
+    const imaginaryPart = (i * or) + (r * oi);
 
     return complexNumber(realPart, imaginaryPart);
   };

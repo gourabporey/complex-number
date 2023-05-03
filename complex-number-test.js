@@ -44,10 +44,11 @@ describe("complexNumber", function() {
       const a = complexNumber(2, 3);
       const b = complexNumber(3, 2);
 
-      const actual = a.add(b).toString(); 
-      const expected = "5 + 5i";
+      const expected = complexNumber(5, 5);
+      const actual = a.add(b); 
 
-      deepStrictEqual(actual, expected);
+      deepStrictEqual(actual.getRealPart(), expected.getRealPart());
+      deepStrictEqual(actual.getImaginaryPart(), expected.getImaginaryPart());
     });
   });
 
@@ -56,10 +57,11 @@ describe("complexNumber", function() {
       const a = complexNumber(2, 3);
       const b = complexNumber(3, 2);
 
-      const actual = a.mul(b).toString(); 
-      const expected = "13i";
+      const actual = a.mul(b); 
+      const expected = complexNumber(0, 13);
 
-      deepStrictEqual(actual, expected);
+      deepStrictEqual(actual.getRealPart(), expected.getRealPart());
+      deepStrictEqual(actual.getImaginaryPart(), expected.getImaginaryPart());
     });
   });
 });
