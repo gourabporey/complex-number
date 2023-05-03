@@ -2,6 +2,10 @@ const complexNum = function(real, imaginary) {
   const realPart = real;
   const imaginaryPart = imaginary;
 
+  const getComplexNum = function() {
+    return {real: realPart, imaginary: imaginaryPart};
+  };
+
   const getImaginaryPart = function() {
     return imaginaryPart;
   };
@@ -11,24 +15,38 @@ const complexNum = function(real, imaginary) {
   };
 
   const getNumber = function() {
+    if(realPart === 0) {
+      return `${imaginaryPart}i`;
+    };
+
     const operator = imaginaryPart > 0 ? "+" : "-";
-    const cn = `${realPart} ${operator} ${imaginaryPart}i`;
-    return realPart !== 0 ? cn : `${operator} ${imaginaryPart}i`;
+    return `${realPart} ${operator} ${imaginaryPart}i`;
   };
 
-  return {getRealPart, getImaginaryPart, getNumber};
+  return {getComplexNum, getRealPart, getImaginaryPart, getNumber};
 };
 
 const operation = function(firstCn, secondCn) {
-  const add = function() {
-    const sumOfRealPath = firstCn.getRealPart() + secondCn.getRealPart();
-    const sumOfImaginaryPath = firstCn.getImaginaryPart() + secondCn.getImaginaryPart();
-    const sum = complexNum(sumOfRealPath, sumOfImaginaryPath);
+  const a = firstCn.getComplexNum();
+  const b = secondCn.getComplexNum();
 
-    return {real: sum.getRealPart(), imaginary: sum.getImaginaryPart()};
+  const add = function() {
+    const sumOfRealPart = a.real + b.real;
+    const sumOfImaginaryPart = a.imaginary + b.imaginary;
+    const sum = complexNum(sumOfRealPart, sumOfImaginaryPart);
+
+    return sum.getComplexNum();
   };
 
-  return {add};
+  const mul = function() {
+    const realPartProduct = a.real * b.real - a.imaginary * b.imaginary;
+    const imaginaryPartProduct = a.imaginary * b.real + a.real * b.imaginary;
+    const product = complexNum(realPartProduct, imaginaryPartProduct);
+
+    return product.getComplexNum(); 
+  };
+
+  return {add, mul};
 };
 
 exports.complexNum = complexNum;

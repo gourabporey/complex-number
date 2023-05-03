@@ -20,7 +20,7 @@ describe("complexNumber", function() {
 
   it("Should give the complex number", function() {
     const cn = complexNum(0, 2);
-    strictEqual(cn.getNumber(), "+ 2i");
+    strictEqual(cn.getNumber(), "2i");
   });
 });
 
@@ -31,5 +31,9 @@ describe("operation", function() {
 
   it("Should give the sum of two imaginary numbers", function() {
     deepStrictEqual(op.add(), {real: 5, imaginary: 5});
+  });
+
+  it("Should give the product of two imaginary numbers", function() {
+    deepStrictEqual(op.mul(), {real: 0, imaginary: 13});
   });
 });
