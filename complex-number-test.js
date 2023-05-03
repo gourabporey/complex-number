@@ -15,12 +15,17 @@ describe("complexNumber", function() {
 
   it("Should give the complex number", function() {
     const cn = complexNum(3, 2);
-    strictEqual(cn.getNumber(), "3 + 2i");
+    strictEqual(cn.stringify(), "3 + 2i");
   });
 
   it("Should give the complex number", function() {
     const cn = complexNum(0, 2);
-    strictEqual(cn.getNumber(), "2i");
+    strictEqual(cn.stringify(), "2i");
+  });
+
+  it("Should give the complex number", function() {
+    const cn = complexNum(3, 0);
+    strictEqual(cn.stringify(), "3");
   });
 });
 

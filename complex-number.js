@@ -14,16 +14,15 @@ const complexNum = function(real, imaginary) {
     return realPart;
   };
 
-  const getNumber = function() {
-    if(realPart === 0) {
-      return `${imaginaryPart}i`;
-    };
-
+  const stringify = function() {
+    if(imaginaryPart === 0) return `${realPart}`;
+    if(realPart === 0) return `${imaginaryPart}i`;
     const operator = imaginaryPart > 0 ? "+" : "-";
+
     return `${realPart} ${operator} ${imaginaryPart}i`;
   };
 
-  return {getComplexNum, getRealPart, getImaginaryPart, getNumber};
+  return {getComplexNum, getRealPart, getImaginaryPart, stringify};
 };
 
 const operation = function(firstCn, secondCn) {
