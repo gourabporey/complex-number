@@ -1,8 +1,4 @@
-const complexNum = function(real, imaginary) {
-  const getComplexNum = function() {
-    return {real, imaginary};
-  };
-
+const complexNumber = function(real, imaginary) {
   const getImaginaryPart = function() {
     return imaginary;
   };
@@ -11,35 +7,40 @@ const complexNum = function(real, imaginary) {
     return real;
   };
 
-  const stringify = function() {
-    if(imaginary === 0) return `${real}`;
-    if(real === 0) return `${imaginary}i`;
+  const toString = function() {
+    if(imaginary === 0) { 
+      return `${real}`;
+    };
+
+    if(real === 0) {
+      return `${imaginary}i`;
+    };    
+
     const operator = imaginary > 0 ? "+" : "-";
 
     return `${real} ${operator} ${Math.abs(imaginary)}i`;
   };
 
   const add = function(augend) {
-    const b = augend.getComplexNum();
+    const sumOfReal = real + augend.getRealPart();
+    const sumOfImaginary = imaginary + augend.getImaginaryPart();
 
-    const sumOfReal = real + b.real;
-    const sumOfImaginary = imaginary + b.imaginary;
-    const sum = complexNum(sumOfReal, sumOfImaginary);
-
-    return sum;
+    return complexNumber(sumOfReal, sumOfImaginary);
   };
 
   const mul = function(multiplicand) {
-    const b = multiplicand.getComplexNum();
+    const r = real;
+    const i = imaginary;
+    const mr = multiplicand.getRealPart();
+    const mi = multiplicand.getImaginaryPart();
 
-    const realPart = real * b.real - imaginary * b.imaginary;
-    const imaginaryPart = imaginary * b.real + real * b.imaginary;
-    const product = complexNum(realPart, imaginaryPart);
+    const realPart = (r * mr) - (i * mi);
+    const imaginaryPart = (i * mr) + (r * mi);
 
-    return product; 
+    return complexNumber(realPart, imaginaryPart);
   };
 
-  return {getComplexNum, getRealPart, getImaginaryPart, stringify, add, mul};
+  return { getRealPart, getImaginaryPart, toString, add, mul };
 };
 
-exports.complexNum = complexNum;
+exports.complexNumber = complexNumber;
