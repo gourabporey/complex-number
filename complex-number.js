@@ -1,46 +1,52 @@
-const complexNumber = function(real, imaginary) {
-  const getImaginaryPart = function() {
-    return imaginary;
+class ComplexNumber {
+  #real;
+  #imaginary;
+
+  constructor(real, imaginary) {
+    this.#real = real;
+    this.#imaginary = imaginary;
   };
 
-  const getRealPart = function() {
-    return real;
+  getImaginaryPart() {
+    return this.#imaginary;
   };
 
-  const toString = function() {
-    if(imaginary === 0) { 
-      return `${real}`;
+  getRealPart() {
+    return this.#real;
+  };
+
+  toString() {
+    if(this.#imaginary === 0) { 
+      return `${this.#real}`;
     };
 
-    if(real === 0) {
-      return `${imaginary}i`;
+    if(this.#real === 0) {
+      return `${this.#imaginary}i`;
     };    
 
-    const operator = imaginary > 0 ? "+" : "-";
+    const operator = this.#imaginary > 0 ? "+" : "-";
 
-    return `${real} ${operator} ${Math.abs(imaginary)}i`;
+    return `${this.#real} ${operator} ${Math.abs(this.#imaginary)}i`;
   };
 
-  const add = function(other) {
-    const sumOfReal = real + other.getRealPart();
-    const sumOfImaginary = imaginary + other.getImaginaryPart();
+  add(other) {
+    const real = this.#real + other.#real;
+    const imaginary = this.#imaginary + other.#imaginary;
 
-    return complexNumber(sumOfReal, sumOfImaginary);
+    return new ComplexNumber(real, imaginary);
   };
 
-  const mul = function(other) {
-    const r = real;
-    const i = imaginary;
-    const or = other.getRealPart();
-    const oi = other.getImaginaryPart();
+  mul(other) {
+    const r = this.#real;
+    const i = this.#imaginary;
+    const or = other.#real;
+    const oi = other.#imaginary;
 
-    const realPart = (r * or) - (i * oi);
-    const imaginaryPart = (i * or) + (r * oi);
+    const real = (r * or) - (i * oi);
+    const imaginary = (i * or) + (r * oi);
 
-    return complexNumber(realPart, imaginaryPart);
+    return new ComplexNumber(real, imaginary);
   };
-
-  return { getRealPart, getImaginaryPart, toString, add, mul };
 };
 
-exports.complexNumber = complexNumber;
+exports.ComplexNumber = ComplexNumber;
