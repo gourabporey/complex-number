@@ -1,6 +1,6 @@
 const { describe, it } = require("node:test");
 const { deepStrictEqual, strictEqual } = require("assert");
-const { ComplexNumber } = require("./complex-number.js");
+const { ComplexNumber } = require("../src/complex-number.js");
 
 describe("complexNumber", function() {
   describe("getImaginaryPart()", function() {
