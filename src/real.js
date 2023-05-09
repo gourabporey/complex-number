@@ -5,8 +5,8 @@ class Real {
     this.#value = +number;
   };
 
-  value() {
-    return this.#value;
+  equals(other) {
+    return this.#value === other.#value;
   };
 
   add(other) {

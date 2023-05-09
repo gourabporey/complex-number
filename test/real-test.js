@@ -1,15 +1,35 @@
 const { describe, it } = require("node:test");
-const { strictEqual, deepStrictEqual } = require("assert");
+const { strictEqual, deepStrictEqual, ...assert } = require("assert");
 const { Real } = require("../src/real.js");
 
 describe("Real Number", function() {
+  describe("multiply", function() {
+    it("Should give another real number whose value is the sum of two non-zero real numbers", function() {
+      const a = new Real(4);
+      const b = new Real(5);
+      const actual = a.multiply(b);
+      const expected = new Real(20);
+      assert.ok(actual.equals(expected));
+    });
+  });
+
   describe("add", function() {
     it("Should give another real number whose value is the sum of two non-zero real numbers", function() {
       const a = new Real(4);
       const b = new Real(5);
-      const actual = a.add(b).value();
-      const expected = new Real(9).value();
-      strictEqual(actual, expected);
+      const actual = a.add(b);
+      const expected = new Real(9);
+      assert.ok(actual.equals(expected));
+    });
+  });
+
+  describe("Subtract()", function() {
+    it("Should give another real number whose value is the difference of two non-zero real numbers", function() {
+      const a = new Real(40);
+      const b = new Real(5);
+      const actual = a.subtract(b);
+      const expected = new Real(35);
+      assert.ok(actual.equals(expected));
     });
   });
 
@@ -25,25 +45,29 @@ describe("Real Number", function() {
     });
   });
 
-  describe("value()", function() {
-    it("Should give 0 if I don't provide any value during making the real number", function() {
+  describe("equals()", function() {
+    it("Should be equal for two real numbers with no contructor", function() {
       const r1 = new Real();
-      strictEqual(r1.value(), 0);
+      const r2 = new Real()
+      strictEqual(r1.equals(r2), true);
     });
 
-    it("Should give the value of the real number", function() {
+    it("Should be equal for two real numbers with same value", function() {
       const r1 = new Real(5);
-      strictEqual(r1.value(), 5);
+      const r2 = new Real(5);
+      strictEqual(r1.equals(r2), true);
     });
 
-    it("Should give value of the real number when the number is in text form", function() {
-      const r1 = new Real("5");
-      strictEqual(r1.value(), 5);
+    it("Should not be equal for two real numbers with different values", function() {
+      const r1 = new Real(5);
+      const r2 = new Real(7);
+      strictEqual(r1.equals(r2), false);
     });
 
-    it("Should give NaN for any thing other than type number", function() {
-      const r1 = new Real("a");
-      strictEqual(r1.value(), NaN);
+    it("Should be equal for two real numbers with same values and different types", function() {
+      const r1 = new Real(5);
+      const r2 = new Real("5");
+      strictEqual(r1.equals(r2), true);
     });
   });
 });
